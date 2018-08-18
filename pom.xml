@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>net.merc.docker</groupId>
+    <artifactId>openjdk8</artifactId>
+    <version>0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>OpenJDK 8 Containers</name>
+
+    <modules>
+        <module>jdk</module>
+        <module>jre</module>
+    </modules>
+
+    <properties>
+        <docker.buildArg.JAVA_RPM_VERSION>1.8.0.171-8.b10.el7_5</docker.buildArg.JAVA_RPM_VERSION>
+        <java-rpm-tag.version>8u171</java-rpm-tag.version>
+        <maven.rpm.version>8</maven.rpm.version>
+        <build-number-default>0</build-number-default>
+    </properties>
+
+</project>

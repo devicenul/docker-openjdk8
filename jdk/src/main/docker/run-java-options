@@ -1,0 +1,14 @@
+#! /bin/bash
+
+_options=""
+options_dir="/deployments/options.d"
+
+for script_name in ${options_dir}/*
+do
+    if [ -r ${script_name} ]
+    then
+        _options="${_options} $(/bin/bash ${script_name})"
+    fi
+done
+
+echo ${_options}

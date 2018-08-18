@@ -1,0 +1,14 @@
+#! /bin/bash
+
+local_options=""
+options_dir="/deployments/options.d"
+
+ls ${options_dir} | while read script_name
+do
+    if [ -r ${options_dir}/${script_name} ]
+    then
+        local_options="${local_options} $(/bin/bash ${options_dir}/${script_name})"
+    fi
+done
+
+echo ${local_options}

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>net.merc.docker</groupId>
+        <artifactId>openjdk8</artifactId>
+        <version>0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <groupId>net.merc.docker</groupId>
+    <artifactId>openjdk8-jdk</artifactId>
+    <version>0.1-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>agent-bond-agent</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+         <profile>
+            <id>docker</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.fabric8</groupId>
+                        <artifactId>docker-maven-plugin</artifactId>
+                        <configuration>
+                            <images>
+                                <!-- A single's image configuration -->
+                                <image>
+                                    <name>mercnet/openjdk8-jdk</name>
+                                    <build>
+                                        <dockerFile>${project.basedir}/src/main/docker/Dockerfile</dockerFile>
+                                        <assembly>
+                                            <inline>
+                                                <dependencySet>
+                                                    <useProjectAttachments>true</useProjectAttachments>
+                                                </dependencySet>
+                                            </inline>
+                                        </assembly>
+                                        <tags>
+                                            <tag>latest</tag>
+                                            <tag>8</tag>
+                                            <tag>${java-rpm-tag.version}</tag>
+                                            <tag>${maven.rpm.version}-${docker.build.tag}</tag>
+                                        </tags>
+                                    </build>
+                                </image>
+                            </images>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

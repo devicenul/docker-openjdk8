@@ -1,0 +1,30 @@
+#! /bin/bash
+
+local_spring_options=""
+
+if [ ! -z "${SPRING_PROFILES}" ]
+then
+    local_spring_options="-Dspring.profiles.active=${SPRING_PROFILES}"
+fi
+
+if [ ! -z "${SPRING_CONFIG_URI}" ]
+then
+    local_spring_options="${local_spring_options} -Dspring.cloud.config.uri=${SPRING_CONFIG_URI}"
+fi
+
+if [ ! -z "${SPRING_DISCOVERY_URI}" ]
+then
+    local_spring_options="${local_spring_options} -Deureka.client.serviceUrl.defaultZone=${SPRING_DISCOVERY_URI}"
+fi
+
+if [ ! -z "${SERVER_PORT}" ]
+then
+    local_spring_options="${local_spring_options} -Dserver.port=${SERVER_PORT}"
+fi
+
+if [ ! -z "${SPRING_OPTIONS}" ]
+then
+    local_spring_options="${local_spring_options} ${SPRING_OPTIONS}"
+fi
+
+echo ${local_spring_options}
